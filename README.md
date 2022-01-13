@@ -1,2 +1,2 @@
-# cheat-sheets
-Cheat Sheets
+# Reference Cards
+Reference Cards also know as Cheat Sheets
