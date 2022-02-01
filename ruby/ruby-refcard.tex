@@ -1,0 +1,278 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Copyright (c) 2022 Clifford Thompson
+%   All code in this file is released under Creative Commons Attribution
+%   (CC-BY) license : https://creativecommons.org/licenses/by/4.0
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[6pt]{article}
+
+\usepackage[
+      pdftitle={Ruby Reference Card},
+      pdfauthor={Clifford Thompson},
+      pdfkeywords={Ruby, Quick Reference, Refcard, Cheat Sheet},
+      pdfsubject={Quick Reference Card for Ruby}
+]{hyperref}
+
+\usepackage{../styles/refcards}
+\usepackage{vmargin}
+\usepackage{amsmath}
+
+% A4
+%\setpapersize[landscape]{A4}
+%\setmarginsrb%
+%{1.5cm}  % left
+%{1.0cm}  % top
+%{1.5cm}  % right
+%{1.0cm}  % bottom
+%{0ex}    % header height
+%{0ex}    % header separation
+%{0ex}    % footer height
+%{0ex}    % footser separation
+%\setlength\columnsep{7mm}
+
+% Letter
+\setpapersize[landscape]{USletter}
+\setmarginsrb%
+{1.1cm}  % left
+{1.1cm}  % top
+{0.9cm}  % right
+{0.9cm}  % bottom
+{0ex}    % header height
+{0ex}    % header separation
+{0ex}    % footer height
+{0ex}    % footser separation
+\setlength\columnsep{4mm}
+
+\begin{document}
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+  \title{Ruby Reference Card}
+
+  {\scriptsize
+    (c) 2022 Clifford Thompson \url{<clifford.thompson@gmail.com>}\\
+    \url{https://github.com/cliffordthompson}
+
+    This work is licensed under the Creative Commons Attribution 4.0 International.
+    To view a copy of this license, visit
+    \url{https://creativecommons.org/licenses/by/4.0/}
+  }
+
+  \section{Syntax}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt \# This line is not executed & comment \\
+  \end{tabular}
+
+  \subsection{Reserved Words}
+  \begin{tabular}{L{0.14\linewidth} L{0.14\linewidth} L{0.14\linewidth} L{0.14\linewidth} L{0.14\linewidth} L{0.14\linewidth} L{0.14\linewidth}}
+    \tt unless & and & def & end & in & or & self \\
+    \tt until & begin & defined? & ensure & module & redo & super \\
+    \tt BEGIN & break & do & false & next & rescue & then \\
+    \tt END & case & else & for & nil & retry & true \\
+    \tt alias & class & elsif & if & not & return & undef \\
+    \tt when & while & yield & {\scriptsize \_\_FILE\_\_} & {\scriptsize\_\_LINE\_\_} & &\\
+  \end{tabular}
+
+  \section{Variables and Constants}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt var        & local variable              \\
+    \tt @var       & instance variable           \\
+    \tt @@var      & class variable              \\
+    \tt \$var      & global variable             \\
+    \tt CONSTANT   & constant                    \\
+    \tt self       & reference to class instance \\
+    \tt nil        & instance of NilClass        \\
+    \tt true       & instance of TrueClass       \\
+    \tt false      & instance of FalseClass      \\
+    \tt \$1,\$2... & regex captures              \\
+  \end{tabular}
+
+  \section{Literals}
+  \subsection{Numerics}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt 1234                           & Integer instance                          \\
+    \tt 1\_2345                        & Integer (underscore ignored)              \\
+    \tt 1.234                          & Float instance                            \\
+    \tt 1.2e-34                        & Float instance                            \\
+    \tt 12/34r                         & Rational instance                         \\
+    \tt 0xabcd                         & hexidecimal Integer                       \\
+    \tt 0123                           & octal Integer                             \\
+    \tt 0b10110                        & binary Integer                            \\
+    \tt ?a                             & ASCII code for 'a'                        \\
+    \tt ?$\backslash$C-a               & Control-a                                 \\
+    \tt ?$\backslash$M-a               & Meta-a                                    \\
+    \tt ?$\backslash$M-$\backslash$C-a & Meta-Control-a                            \\
+    \tt $\backslash$n                  & newline                                   \\
+    \tt $\backslash$t                  & tab                                       \\
+    \tt $\backslash$x\itt{nn}          & character with hex value \itt{nn}         \\
+    \tt $\backslash$u\itt{nnnn}        & character with unicode value \itt{nnnn}   \\
+    \tt $\backslash$u\{\itt{nnnnn}\}   & unicode character with more than 4 digits \\
+  \end{tabular}
+  \subsection{Strings}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt `a string'            & non-interpolated string            \\
+    \tt ``3 + 3 = \#\{3+3\}'' & interpolated string                \\
+    \tt \%\{a string\}        & custom delimeter (\{,(,[,?,\~,etc) \\
+    \tt \%q[ ]                & non-interpolated string            \\
+    \tt \%Q[ ]                & interpolated string                \\
+    \tt \%r[ ]                & interpolated regex                 \\
+    \tt \%i[ ]                & non-interpolated array of symbols  \\
+    \tt \%I[ ]                & interpolated array of symbols      \\
+    \tt \%w[ ]                & non-interpolated array of words    \\
+    \tt \%W[ ]                & interpolated array of words        \\
+    \tt \%x[ ]                & interpolated shell command         \\
+    \tt \%s[ ]                & non-interpolated symbol            \\
+  \end{tabular}
+  \subsection{Hashes}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt z = Hash.new             & instantiate empty hash \\
+    \tt z = {}                   & instantiate empty hash \\
+    \tt z = {'x' => 0, 'y' => 1} & hash with string keys  \\
+    \tt z = {:x => 0, :y => 1}   & hash with symbol keys  \\
+    \tt z = {x: 0, y: 1}         & hash with symbol keys  \\
+  \end{tabular}
+  \subsection{Ranges}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt 0..10     & closed range     \\
+    \tt 0.0...1.0 & open-ended range \\
+    \tt 'a'..'m'  & character range  \\
+  \end{tabular}
+
+  \section{Operators}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt [],[]=                               & element reference, element set  \\
+    \tt ., \&.                               & navigator, safe navigator       \\
+    \tt **                                   & exponentation                   \\
+    \tt !,\~                                 & boolean NOT, bitwise complement \\
+    \tt +, -                                 & unary plus, minus               \\
+    \tt *, /, \%, +, -                       & math operations                 \\
+    \tt <<, >>                               & shift left, right               \\
+    \tt \&, |, \^                            & bitwise AND, OR, XOR            \\
+    \tt <, <=, >, >=, ==, !=                 & comparisons                     \\
+    \tt <=>                                  & equality operator (-1,0,1)      \\
+    \tt ===                                  & case equality                   \\
+    \tt =~, !~                               & pattern matching                \\
+    \tt \&\&, ||                             & boolean AND, OR                 \\
+    \tt .., ...                              & range, open-end range           \\
+    \tt ?:                                   & ternary conditional             \\
+    \tt rescue                               & binary catch exception          \\
+    \tt =                                    & assignment                      \\
+    \tt **=, *=, /=, \%=, += -=              & compound assignment             \\
+    \tt <<=, >>=, \&\&=, \&=, ||=, |=, \^{}= & compound assignment             \\
+    \tt defined?                             & unary, nil if not defined       \\
+    \tt not, and, or                         & boolean NOT, AND, OR            \\
+    \tt if, unless                           & inline conditional              \\
+    \tt while, until                         & inline loop                     \\
+  \end{tabular}
+
+  \section{Control Structures}
+
+  \subsection{Conditional Branches}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+
+    % if conditional
+    \tt \textbf{if} \itt{expr} [then]     & conditional                    \\
+    \tt ~~\itt{statement}                                                  \\
+    \tt elsif \itt{expr}                                                   \\
+    \tt ~~\itt{statement}                                                  \\
+    \tt else \itt{expr}                                                    \\
+    \tt ~~\itt{statement}                                                  \\
+    \tt end                                                                \\
+    % unless conditional
+    \tt \textbf{unless} \itt{expr} [then] & negative conditional           \\
+    \tt ~~\itt{statement}                                                  \\
+    \tt else \itt{expr}                                                    \\
+    \tt ~~\itt{statement}                                                  \\
+    \tt end                                                                \\
+    % case statement
+    \tt \textbf{case} \itt{expr}          & case statement                 \\
+    \tt when \itt{n}                      & \itt{expr} is n                \\
+    \tt ~~\itt{statement}                                                  \\
+    \tt when \itt{n..m}                   & \itt{expr} is between n and m  \\
+    \tt ~~\itt{statement}                                                  \\
+    \tt when '\itt{str}'                  & \itt{expr} equals \itt{str}    \\
+    \tt ~~\itt{statement}                                                  \\
+    \tt when /regex/                      & \itt{expr} matches \itt{regex} \\
+    \tt ~~\itt{statement}                                                  \\
+    \tt else                              & default case                   \\
+    \tt ~~\itt{statement}                                                  \\
+    \tt end                                                                \\
+
+  \end{tabular}
+
+  \subsection{Loops}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    % while loop
+    \tt \textbf{while} \itt{expr} [do]    & while-loop                     \\
+    \tt ~~\itt{statement}                                                  \\
+    \tt end                                                                \\
+    % until loop
+    \tt \textbf{until} \itt{expr} [do]    & until-loop                     \\
+    \tt ~~\itt{statement}                                                  \\
+    \tt end                                                                \\
+    % do-while-loop
+    \tt \textbf{do}                       & do-while-loop                  \\
+    \tt ~~\itt{statement}                                                  \\
+    \tt while \itt{expr}                                                   \\
+    % do-until-loop
+    \tt \textbf{do}                       & do-until-loop                  \\
+    \tt ~~\itt{statement}                                                  \\
+    \tt until \itt{expr}                                                   \\
+  \end{tabular}
+
+  \subsection{Exception Handling}
+  TBD
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+  \end{tabular}
+
+  \section{Methods}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    % class
+    \tt \textbf{def} method(x,y)      & method definition \\
+    \tt ~~\itt{statement}                                 \\
+    \tt end                                               \\
+    \tt \textbf{def} method(x:,y:)      & keyword arguments \\
+    \tt \textbf{def} method(x=1,y=[]) & default argument values    \\
+    \tt \textbf{def} method(x:1,y:[]) & default argument values    \\
+    \tt \textbf{def} method(x=1,y=[],*z) & variable arguments \\
+  \end{tabular}
+
+  \section{Classes}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    % class
+    \tt \textbf{class} \itt{Employee < Person } & inheritance                     \\
+    \tt ~~attr\_accessor :name                  & instance var with r/w accessors \\
+    \tt ~~attr\_reader :id                      & instance var with read accessor \\
+    \tt ~~@start\_date = `...'                  & instance var                    \\
+    \tt ~~@@number\_employees = 0               & class variable                  \\
+    \tt ~~private                               & public visibility (default)     \\
+    \tt ~~def initialize(name)                  & constructor                     \\
+    \tt ~~~~@name = name                                                          \\
+    \tt ~~~~@@number\_employees += 1                                              \\
+    \tt ~~end                                                                     \\
+    \tt ~~def work                              & instance method                 \\
+    \tt ~~~~\itt{statement}                                                       \\
+    \tt ~~end                                                                     \\
+    \tt ~~def self.number\_employees            & class method                    \\
+    \tt ~~~~@@number\_employees                                                   \\
+    \tt ~~end                                                                     \\
+    \tt ~~private                               & private visibility              \\
+    \tt ~~def id=(new\_id)                                                        \\
+    \tt ~~~~@id = id                                                              \\
+    \tt ~~end                                                                     \\
+    \tt ~~protected                             & protected visibility            \\
+    \tt ~~def <=>(other)                                                          \\
+    \tt ~~~~\itt{statement}                                                       \\
+    \tt ~~end                                                                     \\
+    \tt end                                                                       \\
+    \tt \textbf{Employee.new(`Ruby')}           & create class instance           \\
+  \end{tabular}
+
+  \section{Regex}
+  TBD
+
+\end{multicols}
+\end{document}
