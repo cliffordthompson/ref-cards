@@ -82,11 +82,19 @@
     \tt vendor/ & $3^{rd}$ party gems\\
   \end{tabular}
 
-  \section{Rails Commands}
+  \section{Command Scripts}
   \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
     \tt bin/bundle & installs/maintains Ruby gems via \itt{Gemfile}\\
     \tt bin/rake & runs tasks\\
     \tt bin/rails & main Rails script\\
+  \end{tabular}
+  \subsection{Commands}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt bin/rails new \itt{Project} & creates new Rails project \itt{Project}\\
+    \tt bin/rails s[erver] & starts web server\\
+    \tt bin/rails c[onsole] & starts rails debugging console\\
+    \tt bin/rails generate scaffold \itt{Model} & generate default MVC files for \itt{Model}\\
+    \tt bin/rake db:migrate & applies database migrations \\
   \end{tabular}
 
 \end{multicols}
