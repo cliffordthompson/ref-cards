@@ -1,0 +1,93 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Copyright (c) 2022 Clifford Thompson
+%   All code in this file is released under Creative Commons Attribution
+%   (CC-BY) license : https://creativecommons.org/licenses/by/4.0
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[6pt]{article}
+
+\usepackage[
+      pdftitle={Ruby on Rails Reference Card},
+      pdfauthor={Clifford Thompson},
+      pdfkeywords={Ruby, Rails, Quick Reference, Refcard, Cheat Sheet},
+      pdfsubject={Quick Reference Card for Ruby on Rails}
+]{hyperref}
+
+\usepackage{../styles/refcards}
+\usepackage{vmargin}
+\usepackage{amsmath}
+
+% A4
+%\setpapersize[landscape]{A4}
+%\setmarginsrb%
+%{1.5cm}  % left
+%{1.0cm}  % top
+%{1.5cm}  % right
+%{1.0cm}  % bottom
+%{0ex}    % header height
+%{0ex}    % header separation
+%{0ex}    % footer height
+%{0ex}    % footser separation
+%\setlength\columnsep{7mm}
+
+% Letter
+\setpapersize[landscape]{USletter}
+\setmarginsrb%
+{1.1cm}  % left
+{1.1cm}  % top
+{0.9cm}  % right
+{0.9cm}  % bottom
+{0ex}    % header height
+{0ex}    % header separation
+{0ex}    % footer height
+{0ex}    % footser separation
+\setlength\columnsep{4mm}
+
+\begin{document}
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+  \title{Ruby on Rails Reference Card}
+
+  {\scriptsize
+    (c) 2022 Clifford Thompson \url{<clifford.thompson@gmail.com>}\\
+    \url{https://github.com/cliffordthompson}
+
+    This work is licensed under the Creative Commons Attribution 4.0 International.
+    To view a copy of this license, visit
+    \url{https://creativecommons.org/licenses/by/4.0/}
+  }
+
+  \section{Application Structure}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt app/ & location of ruby code \\
+    \tt app/assets &  images, js, css \\
+    \tt app/helpers &  helpers for views \\
+    \tt app/mailers &  classes for emailers \\
+    \tt bin/ & scripts used for running/building rails \\
+    \tt config/ & configuration \\
+    \tt config/environments/ & env-specific config \\
+    \tt config/environments/routes.rb & route mappings \\
+    \tt db/seeds.rb & default database data\\
+    \tt db/migrate & database migrations\\
+    \tt lib/ & reusable library code\\
+    \tt lib/tasks & rake task code\\
+    \tt log/ & log files\\
+    \tt public/ & files for root directory \\
+    \tt test/ & automated tests \\
+    \tt tmp/ & temporary files\\
+    \tt vendor/ & $3^{rd}$ party gems\\
+  \end{tabular}
+
+  \section{Rails Commands}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt bin/bundle & installs/maintains Ruby gems via \itt{Gemfile}\\
+    \tt bin/rake & runs tasks\\
+    \tt bin/rails & main Rails script\\
+  \end{tabular}
+
+\end{multicols}
+\end{document}
