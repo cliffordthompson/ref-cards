@@ -82,7 +82,7 @@
     \tt vendor/ & $3^{rd}$ party gems\\
   \end{tabular}
 
-  \section{Command Scripts}
+  \section{Command Line}
   \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
     \tt bin/bundle & installs/maintains Ruby gems via \itt{Gemfile}\\
     \tt bin/rake & runs tasks\\
@@ -94,8 +94,119 @@
     \tt bin/rails s[erver] & starts web server\\
     \tt bin/rails c[onsole] & starts rails debugging console\\
     \tt bin/rails generate scaffold \itt{Model} & generate default MVC files for \itt{Model}\\
-    \tt bin/rake db:migrate & applies database migrations \\
+    \tt bin/rails g migration add\_\itt{column}\_to\_\itt{table} \itt{column}:\itt{type} & add \itt{column} with \itt{type} to \itt{table}\\
+    \tt bin/rake db:migrate & applies database migrations\\
+    \tt bin/rake db:rollback & rollback databse migration\\
+    \tt bin/rake db:schema:load & create new empty database\\
   \end{tabular}
+
+  \section{ActiveRecord}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt &\\
+  \end{tabular}
+
+  \subsection{Create}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt a. Model.create [\itt{attr: val}] & create/commit row to \itt{Model} table \\
+    \tt b. model = Model.new & create model instance\\
+    \tt ~~~ model.attr = val & set model attribute\\
+    \tt ~~~ model.save & save \itt{model} to database\\
+  \end{tabular}
+
+  \subsection{Read}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt Model.all & return all of rows in \itt{Model} table\\
+    \tt Model.first & return first row in \itt{Model} table\\
+    \tt Model.last & return last row in \itt{Model} table\\
+    \tt Model.find(\itt{n}) & find row with \itt{id} == \itt{n}\\
+    \tt Model.find\_by(\itt{attr}: \itt{val}) & find row with \itt{attr} == \itt{val} \\
+    \tt Model.limit(\itt{n}) & limit query to \itt{n} rows\\
+    \tt Model.offset(\itt{n}) & skip the first \itt{n} rows\\
+    \tt Model.order(``attr ORDER'') & return rows in ASC/DESC order\\
+    \tt Model.count & return number of rows\\
+    \tt Model.sum(:attr) & return sum of \itt{attr} columns\\
+    \tt Model.maximum(:attr) & return max of \itt{attr} columns\\
+    \tt Model.minimum(:attr) & return min of \itt{attr} columns\\
+    \tt Model.average(:attr) & return average of \itt{attr} columns\\
+  \end{tabular}
+
+  \subsection{Update}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt a. model = Model.find(\itt{n}) & find row with \itt{id} == \itt{n}\\
+    \tt ~~~ model.attr = val & set model attribute\\
+    \tt ~~~ mode.save & save updates to database \\
+    \tt b. model = Model.find(\itt{n}) & find row by \itt{id} == \itt{n}\\
+    \tt ~~~ model.update(attr: val) & update attribute and commit row\\
+  \end{tabular}
+
+  \subsection{Delete}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt a. Model.destroy(\itt{n}) & remove row with \itt{id} == \itt{n}\\
+    \tt b. model = Model.find(\itt{n}) & find row with \itt{id} == \itt{n}\\
+    \tt ~~~ model.destroy & remove row from table\\
+    \tt c. Model.where(attr: val).destroy\_all & remove rows where \itt{attr} == \itt{val}\\
+    \tt d. Model.destroy\_all & remove rows for \itt{Model} table\\
+  \end{tabular}
+
+  \subsection{Validations}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt validates :attr, :presence => true & enforce presence of \itt{attr}\\
+  \end{tabular}
+
+  \subsection{Validation Methods}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt valid? & test validity of instance object\\
+    \tt errors & returns ActiveModel::Errors object\\
+  \end{tabular}
+
+  \subsection{Associations}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt has\_many :tables & creates 1:* association with \itt{Table}\\
+    \tt has\_one :table & creates 1:1 association with \itt{Table}\\
+    \tt belongs\_to :table & creates 1:1 association with \itt{Table}\\
+  \end{tabular}
+
+  \subsection{has\_many Methods}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt tables & returns array of \itt{tables}\\
+    \tt tables< & add \itt{table} associated with row\\
+    \tt tables= & replace existing array of \itt{tables}\\
+    \tt table\_ids & return array of \itt{table} ids\\
+    \tt table\_ids= & replace existing arrays of \itt{tables} using ids\\
+    \tt tables.create & create new \itt{table} associated with row\\
+    \tt tables.empty? & checks if association is empty\\
+    \tt tables.size & returns size of association\\
+    \tt tables.find(\itt{n}) & find association by id \itt{n}\\
+    \tt tables.where(attr: val) & find association by attribute\\
+  \end{tabular}
+
+  \subsection{belongs\_to Methods}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt table & returns associated \itt{Table} row\\
+    \tt table= & replace associated \itt{Table} row\\
+    \tt build\_table & create new \itt{table} association\\
+    \tt create\_table & creates/commits new \itt{table} association\\
+    \tt create\_table! & creates/commits new \itt{table}. Raises excpetion if invalid\\
+  \end{tabular}
+
+  \subsection{Callbacks}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+  \end{tabular}
+
+  \subsection{Exceptions}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt ActiveRecord::RecordNotFound & row is not found\\
+    \tt ActiveRecord::RecordInvalid & record is invalid\\
+  \end{tabular}
+
+  \section{Controllers}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+  \end{tabular}
+
+  \section{Views}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+  \end{tabular}
+
 
 \end{multicols}
 \end{document}
