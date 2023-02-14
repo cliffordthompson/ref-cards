@@ -88,6 +88,7 @@
     \tt true       & instance of TrueClass       \\
     \tt false      & instance of FalseClass      \\
     \tt \$1,\$2... & regex captures              \\
+    \tt var.class  & class of a varaible         \\
   \end{tabular}
 
   \section{Literals}
@@ -243,36 +244,77 @@
   \section{Classes}
   \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
     % class
-    \tt \textbf{class} \itt{Employee < Person } & inheritance                     \\
-    \tt ~~attr\_accessor :name                  & instance var with r/w accessors \\
-    \tt ~~attr\_reader :id                      & instance var with read accessor \\
-    \tt ~~@start\_date = `...'                  & instance var                    \\
-    \tt ~~@@number\_employees = 0               & class variable                  \\
-    \tt ~~private                               & public visibility (default)     \\
-    \tt ~~def initialize(name)                  & constructor                     \\
-    \tt ~~~~@name = name                                                          \\
-    \tt ~~~~@@number\_employees += 1                                              \\
-    \tt ~~end                                                                     \\
-    \tt ~~def work                              & instance method                 \\
-    \tt ~~~~\itt{statement}                                                       \\
-    \tt ~~end                                                                     \\
-    \tt ~~def self.number\_employees            & class method                    \\
-    \tt ~~~~@@number\_employees                                                   \\
-    \tt ~~end                                                                     \\
-    \tt ~~private                               & private visibility              \\
-    \tt ~~def id=(new\_id)                                                        \\
-    \tt ~~~~@id = id                                                              \\
-    \tt ~~end                                                                     \\
-    \tt ~~protected                             & protected visibility            \\
-    \tt ~~def <=>(other)                                                          \\
-    \tt ~~~~\itt{statement}                                                       \\
-    \tt ~~end                                                                     \\
-    \tt end                                                                       \\
-    \tt \textbf{Employee.new(`Ruby')}           & create class instance           \\
+    \tt \textbf{class} \itt{Employee < Person }  & inheritance                                           \\
+    \tt ~~attr\_accessor :name                   & instance var with r/w accessors                       \\
+    \tt ~~attr\_reader :id                       & instance var with read accessor                       \\
+    \tt ~~@start\_date = `...'                   & instance var                                          \\
+    \tt ~~@@number\_employees = 0                & class variable                                        \\
+    \tt ~~private                                & public visibility (default)                           \\
+    \tt ~~def initialize(name)                   & constructor                                           \\
+    \tt ~~~~@name = name                                                                                 \\
+    \tt ~~~~@@number\_employees += 1                                                                     \\
+    \tt ~~end                                                                                            \\
+    \tt ~~def work                               & instance method                                       \\
+    \tt ~~~~\itt{statement}                                                                              \\
+    \tt ~~end                                                                                            \\
+    \tt ~~def self.number\_employees             & class method                                          \\
+    \tt ~~~~@@number\_employees                                                                          \\
+    \tt ~~end                                                                                            \\
+    \tt ~~private                                & private visibility                                    \\
+    \tt ~~def id=(new\_id)                                                                               \\
+    \tt ~~~~@id = id                                                                                     \\
+    \tt ~~end                                                                                            \\
+    \tt ~~protected                              & protected visibility                                  \\
+    \tt ~~def <=>(other)                                                                                 \\
+    \tt ~~~~\itt{statement}                                                                              \\
+    \tt ~~end                                                                                            \\
+    \tt end                                                                                              \\
+    \tt \textbf{Object.new(`Ruby')}              & create class instance                                 \\
+    \tt \textbf{Object.methods}                  & all class methods                                     \\
+    \tt \textbf{Object.methods(false)}           & only methods from class                               \\
+    \tt \textbf{Object.instanc\_methods}         & all instance methods                                  \\
+    \tt \textbf{Object.instance\_methods(false)} & only instances from class                             \\
+    \tt \textbf{Object.ancestors}                & ancestor classes and modules                          \\
+    \tt \textbf{Object.define\_method}           & \\
+    \tt \textbf{var.is\_a? Object}               & check if \itt{var} is a or inherits from \itt{Object} \\
+    \tt \textbf{var.instance\_of? Object}        & check if \tt{var} is an \itt{Object}                  \\
+    \tt \textbf{var.responds\_to? :method}       & check if \tt{var} has method \tt{method}              \\
+  \end{tabular}
+
+  \section{Modules}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt \textbf{class} \itt{MyModule} & define module                            \\
+    \tt ~~def myMethod                & module method                            \\
+    \tt ~~~\itt{statement}                                                       \\
+    \tt ~~end                                                                    \\
+    \tt end                                                                      \\
+    \tt \textbf{include MyModule}     & add module methods to class instance     \\
+    \tt \textbf{prepend MyModule}     & prepend module methods to class instance \\
+    \tt \textbf{extend MyModule}      & add module methods to class methods      \\
+    \tt ~~def\_delegators: @name, :size, :empty & create delegate methods for \itt{@name} \\
+  \end{tabular}
+
+  \section{Ruby Standard Library}
+  \subsection{Fowardable Module}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt require 'forwardable' \\
+    \tt class MyClass \\
+    \tt ~~extend Forwardable & extend class with module \\
+    \tt ~~def\_delegators :@name, :size, :empty & create delegate methods for \itt{@name} \\
+    \tt end & \\
   \end{tabular}
 
   \section{Regex}
   TBD
+
+  \section{MetaProgramming}
+  \begin{tabular}{L{0.55\linewidth} L{0.45\linewidth}}
+    \tt \textbf{define\_method} ``my\_method'' do & Defines an instance method \\
+    \tt ~~\itt{statement} \\
+    \tt end \\
+    \tt \textbf{class\_eval} ``\itt{statement}'' & evaluates string with a class \\
+  \end{tabular}
+
 
 \end{multicols}
 \end{document}
